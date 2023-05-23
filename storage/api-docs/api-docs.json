@@ -1,0 +1,60 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sartex API Documentation",
+        "version": "1.0.0"
+    },
+    servers: [
+        {
+            url: '/api'
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "description": "Login route",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@admin.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "azerty"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success: Object with user(profile + access token) attribute"
+                    },
+                    "403": {
+                        "description": "Authentication required"
+                    },
+                    "422": {
+                        "description": "Bad parameters received"
+                    }
+                }
+            }
+        }
+    }
+}
